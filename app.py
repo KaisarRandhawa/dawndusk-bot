@@ -9,7 +9,7 @@ app = Flask(__name__)
 #  CONFIGURATION  ← paste your values here
 # ─────────────────────────────────────────────
 VERIFY_TOKEN        = "dawndusk2024"          # any secret word you choose
-ACCESS_TOKEN        = "EAFZCiA0m9wuIBRcp6LOnupuB5aYfWhiuhVsOv8ug9dCzmXId0AyXixG3PuFvrtFZCTwfDLCyZCw3RKDW9Y1pY2BBd9dCVr8Pgk805OyLNzupC1bZClZACvYJeiTfVZBy0h3BrhmLvGYazOc8ZC0TT16PLK23v43l2vj4ykpAB0DlNGeVNLAQdGw3VE8YNdbhfKptKvNmKkvN3uZBz3f1uKklZCgOLO9UGMwq3bywCBKeXw7x9W9oSyLBpR1Lqf6aeZCZCRZA8YCMHbm6RKSjuuCnHG0Y6NdfZCaJZC8u4PFriizQZDZD"
+ACCESS_TOKEN        = "EAFZCiA0m9wuIBRSWNIeAhV7ggLDVeGjXyBwDoQ2sDYHrMzRzXXy5QycQqh1hbkgGGELTVeErFv0uENo9YkiZBgLXYyN3jN3dr1KPMcd6vbGAbyk4p0zRVf705lxDZBiBek6tzZA1ZA52QeLmanZC4EvN3AnNgFZBvVqmWJmzUwvb3hi1FOFgyxtfC6vfCo7RBZBJVzeCITvrWsIhV2487TddMNdOZCI9FZBf7TGsrxk594qZB9C3NR6VWkH4QoYmhVnR10vfJxQyzoXX4ZCcZAA9yKKHBLXAXXCMqrW4dFBYS3QZDZD"
 PHONE_NUMBER_ID     = "1114973351698514"
 RESTAURANT_NUMBERS  = ["923210111994", "923006637232"]   # both owners
 API_URL             = f"https://graph.facebook.com/v19.0/{PHONE_NUMBER_ID}/messages"
