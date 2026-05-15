@@ -1,5 +1,4 @@
 import os
-import json
 import requests
 from flask import Flask, request, jsonify
 
@@ -8,10 +7,11 @@ app = Flask(__name__)
 # ─────────────────────────────────────────────
 #  CONFIGURATION  ← paste your values here
 # ─────────────────────────────────────────────
-VERIFY_TOKEN        = "dawndusk2024"          # any secret word you choose
-ACCESS_TOKEN        = "EAFZCiA0m9wuIBRSWNIeAhV7ggLDVeGjXyBwDoQ2sDYHrMzRzXXy5QycQqh1hbkgGGELTVeErFv0uENo9YkiZBgLXYyN3jN3dr1KPMcd6vbGAbyk4p0zRVf705lxDZBiBek6tzZA1ZA52QeLmanZC4EvN3AnNgFZBvVqmWJmzUwvb3hi1FOFgyxtfC6vfCo7RBZBJVzeCITvrWsIhV2487TddMNdOZCI9FZBf7TGsrxk594qZB9C3NR6VWkH4QoYmhVnR10vfJxQyzoXX4ZCcZAA9yKKHBLXAXXCMqrW4dFBYS3QZDZD"
-PHONE_NUMBER_ID     = "1114973351698514"
-RESTAURANT_NUMBERS  = ["923210111994", "923006637232"]   # both owners
+VERIFY_TOKEN        = "dawndusk2024"
+ACCESS_TOKEN        = "PASTE_YOUR_ACCESS_TOKEN_HERE"
+PHONE_NUMBER_ID     = "PASTE_YOUR_NEW_PHONE_NUMBER_ID_HERE"
+RESTAURANT_NUMBERS  = ["923210111994", "923006637232"]
+BUSINESS_WA_LINK    = "https://wa.me/923210111994"
 API_URL             = f"https://graph.facebook.com/v19.0/{PHONE_NUMBER_ID}/messages"
 # ─────────────────────────────────────────────
 
@@ -22,70 +22,70 @@ MENU = {
     "1": {
         "name": "Appetizers",
         "items": {
-            "1": ("Momos (6 pcs)",                   399),
-            "2": ("Chicken Strips (6 pcs)",           450),
-            "3": ("Chicken Wings (6 pcs)",            450),
-            "4": ("Nachos",                           599),
-            "5": ("Chicken Cheese Balls (2 pcs)",     499),
-            "6": ("Cheese Strips (4 pcs)",            499),
-            "7": ("Peri Peri Bites (4 pcs)",          399),
-            "8": ("Dynamite Chicken Poppers",         499),
-            "9": ("Loaded Fries",                     599),
-            "10": ("Mayo Fries",                      350),
-            "11": ("Salted Fries",                    200),
+            "1":  ("Momos (6 pcs)",                399),
+            "2":  ("Chicken Strips (6 pcs)",        450),
+            "3":  ("Chicken Wings (6 pcs)",         450),
+            "4":  ("Nachos",                        599),
+            "5":  ("Chicken Cheese Balls (2 pcs)",  499),
+            "6":  ("Cheese Strips (4 pcs)",         499),
+            "7":  ("Peri Peri Bites (4 pcs)",       399),
+            "8":  ("Dynamite Chicken Poppers",      499),
+            "9":  ("Loaded Fries",                  599),
+            "10": ("Mayo Fries",                    350),
+            "11": ("Salted Fries",                  200),
         }
     },
     "2": {
         "name": "Steak Studio",
         "items": {
-            "1": ("Tarragon Steak",       1150),
-            "2": ("Mushroom Steak",       1150),
-            "3": ("Moroccan Steak",       1150),
-            "4": ("D&D Special Steak",    1299),
+            "1": ("Tarragon Steak",    1150),
+            "2": ("Mushroom Steak",    1150),
+            "3": ("Moroccan Steak",    1150),
+            "4": ("D&D Special Steak", 1299),
         }
     },
     "3": {
         "name": "Stuffed Chicken",
         "items": {
-            "1": ("Cordon Bleu",                      1350),
-            "2": ("Napoleon Stuffed Chicken",         1250),
-            "3": ("Maskawa Stuff Chicken",            1250),
-            "4": ("Chicken Parmesan Stuff Chicken",   1290),
-            "5": ("D&D Special Stuff Chicken",        1390),
+            "1": ("Cordon Bleu",                    1350),
+            "2": ("Napoleon Stuffed Chicken",       1250),
+            "3": ("Maskawa Stuff Chicken",          1250),
+            "4": ("Chicken Parmesan Stuff Chicken", 1290),
+            "5": ("D&D Special Stuff Chicken",      1390),
         }
     },
     "4": {
         "name": "Chinese Corner",
         "items": {
-            "1": ("Chicken Manchurian",   750),
-            "2": ("Kung Pao Chicken",     850),
-            "3": ("Oyster Chicken",       750),
-            "4": ("Chicken Chili Dry",    750),
-            "5": ("Chicken Chow Mein",    650),
-            "6": ("Chinese Combo",       1000),
+            "1": ("Chicken Manchurian", 750),
+            "2": ("Kung Pao Chicken",   850),
+            "3": ("Oyster Chicken",     750),
+            "4": ("Chicken Chili Dry",  750),
+            "5": ("Chicken Chow Mein",  650),
+            "6": ("Chinese Combo",     1000),
         }
     },
     "5": {
         "name": "Burgers",
         "items": {
-            "1": ("Patty Burger",             360),
-            "2": ("Grilled Steak Burger",     499),
-            "3": ("Chilli Bomb Burger",       550),
-            "4": ("Mouthful Crunchy Burger",  370),
-            "5": ("Chicken Cheetos Burger",   699),
-            "6": ("Stuffed Burger",           750),
-            "7": ("Beef Smash Burger",        799),
+            "1": ("Patty Burger",            360),
+            "2": ("Grilled Steak Burger",    499),
+            "3": ("Chilli Bomb Burger",      550),
+            "4": ("Mouthful Crunchy Burger", 370),
+            "5": ("Chicken Cheetos Burger",  699),
+            "6": ("Stuffed Burger",          750),
+            "7": ("Beef Smash Burger",       799),
         }
     },
     "6": {
         "name": "Pasta & Sandwich",
         "items": {
-            "1": ("Alfredo Pasta",          850),
-            "2": ("D&D Special Pasta",     1050),
-            "3": ("Grilled Sandwich",       599),
-            "4": ("Panini Sandwich",        699),
-            "5": ("Mexican Sandwich",       599),
-            "6": ("D&D Special Sandwich",   650),
+            "1": ("Alfredo Pasta",        850),
+            "2": ("D&D Special Pasta",   1050),
+            "3": ("Grilled Sandwich",     599),
+            "4": ("Panini Sandwich",      699),
+            "5": ("Mexican Sandwich",     599),
+            "6": ("D&D Special Sandwich", 650),
         }
     },
     "7": {
@@ -96,26 +96,26 @@ MENU = {
             "3": ("Mint Margarita",      250),
             "4": ("Peach Sparkler",      300),
             "5": ("Regular Soft Drink",  110),
-            "6": ("Water (small/large)", 70),
+            "6": ("Water (small/large)",  70),
         }
     },
 }
 
 # ══════════════════════════════════════════════
-#  SESSION STORE  (in-memory, resets on restart)
+#  SESSION STORE
 # ══════════════════════════════════════════════
 sessions = {}
 
 def get_session(phone):
     if phone not in sessions:
-        sessions[phone] = {"state": "home", "cart": [], "name": ""}
+        sessions[phone] = {"state": "home", "cart": []}
     return sessions[phone]
 
 def clear_session(phone):
-    sessions[phone] = {"state": "home", "cart": [], "name": ""}
+    sessions[phone] = {"state": "home", "cart": []}
 
 # ══════════════════════════════════════════════
-#  SEND MESSAGE HELPER
+#  SEND MESSAGE
 # ══════════════════════════════════════════════
 def send_msg(to, text):
     headers = {
@@ -133,22 +133,25 @@ def send_msg(to, text):
 # ══════════════════════════════════════════════
 #  MESSAGE BUILDERS
 # ══════════════════════════════════════════════
-def welcome_msg():
+def home_msg():
     return (
         "🌅 *Welcome to Dawn & Dusk!*\n"
         "Chinese & Continental Fusion\n"
         "📍 87-A Small D-Ground, Near Student Inn Academy, Faisalabad\n\n"
-        "Please reply with your *name* to get started 😊"
+        "How can we help you today?\n\n"
+        "1️⃣  *Place an Order* 🍽️\n"
+        "2️⃣  *Talk to Us* 💬\n\n"
+        "_Reply with 1 or 2_"
     )
 
-def main_menu_msg(name):
+def main_menu_msg():
     return (
-        f"Hello *{name}*! 👋 What would you like to do?\n\n"
+        "*Order Menu* 📋\n\n"
         "1️⃣  Browse Menu\n"
-        "2️⃣  View Cart\n"
-        "3️⃣  Place Order\n"
-        "4️⃣  Clear Cart\n"
-        "0️⃣  Contact Us\n\n"
+        "2️⃣  View Cart 🛒\n"
+        "3️⃣  Place Order ✅\n"
+        "4️⃣  Clear Cart 🗑️\n"
+        "0️⃣  Back to Home\n\n"
         "_Reply with a number_"
     )
 
@@ -156,7 +159,7 @@ def categories_msg():
     msg = "📋 *Our Menu Categories:*\n\n"
     for k, v in MENU.items():
         msg += f"{k}️⃣  {v['name']}\n"
-    msg += "\n0️⃣  Back to Main Menu\n\n_Reply with a number_"
+    msg += "\n0️⃣  Back\n\n_Reply with a number_"
     return msg
 
 def items_msg(cat_key):
@@ -180,16 +183,26 @@ def cart_msg(cart):
     msg += "Reply *3* to Place Order\nReply *1* to Add More Items\nReply *4* to Clear Cart"
     return msg
 
-def order_summary(name, cart, order_type):
+def order_summary(cart, order_type, customer_phone):
     total = sum(i["price"] * i["qty"] for i in cart)
-    msg = f"🎉 *New Order — Dawn & Dusk*\n\n"
-    msg += f"👤 Customer: {name}\n"
+    msg  = f"🔔 *New Order — Dawn & Dusk*\n\n"
+    msg += f"📱 Customer: +{customer_phone}\n"
     msg += f"📦 Type: {order_type}\n\n"
     msg += "📝 *Items:*\n"
     for item in cart:
         msg += f"• {item['name']} x{item['qty']} = Rs. {item['price'] * item['qty']}\n"
     msg += f"\n💰 *Total: Rs. {total}*"
     return msg
+
+def talk_to_us_msg():
+    return (
+        "💬 *Talk to Us*\n\n"
+        "Our team is ready to help you!\n\n"
+        "Tap the link below to chat with us directly on WhatsApp — one tap, no typing needed! 👇\n\n"
+        f"{BUSINESS_WA_LINK}\n\n"
+        "We'll respond as soon as possible! 🌅\n\n"
+        "_Reply *0* to go back to Home_"
+    )
 
 # ══════════════════════════════════════════════
 #  CORE LOGIC
@@ -199,11 +212,25 @@ def handle_message(phone, text):
     sess = get_session(phone)
     state = sess["state"]
 
-    # ── No name yet ──────────────────────────
-    if state == "home" and not sess["name"]:
-        sess["name"] = text.title()
-        sess["state"] = "main_menu"
-        send_msg(phone, main_menu_msg(sess["name"]))
+    # ── Home ─────────────────────────────────
+    if state == "home":
+        if text == "1":
+            sess["state"] = "main_menu"
+            send_msg(phone, main_menu_msg())
+        elif text == "2":
+            sess["state"] = "talk_to_us"
+            send_msg(phone, talk_to_us_msg())
+        else:
+            send_msg(phone, home_msg())
+        return
+
+    # ── Talk to us ───────────────────────────
+    if state == "talk_to_us":
+        if text == "0":
+            sess["state"] = "home"
+            send_msg(phone, home_msg())
+        else:
+            send_msg(phone, talk_to_us_msg())
         return
 
     # ── Main menu ────────────────────────────
@@ -227,24 +254,19 @@ def handle_message(phone, text):
                 )
         elif text == "4":
             sess["cart"] = []
-            send_msg(phone, "🗑️ Cart cleared!\n\n" + main_menu_msg(sess["name"]))
+            send_msg(phone, "🗑️ Cart cleared!\n\n" + main_menu_msg())
         elif text == "0":
-            send_msg(phone,
-                "📞 *Dawn & Dusk*\n"
-                "87-A, Small D-Ground\n"
-                "Near Student Inn Academy, Faisalabad\n\n"
-                "☎️ 0321-0111994\n"
-                "☎️ 0300-6637232"
-            )
+            sess["state"] = "home"
+            send_msg(phone, home_msg())
         else:
-            send_msg(phone, main_menu_msg(sess["name"]))
+            send_msg(phone, main_menu_msg())
         return
 
     # ── Categories ───────────────────────────
     if state == "categories":
         if text == "0":
             sess["state"] = "main_menu"
-            send_msg(phone, main_menu_msg(sess["name"]))
+            send_msg(phone, main_menu_msg())
         elif text in MENU:
             sess["state"] = f"items_{text}"
             send_msg(phone, items_msg(text))
@@ -258,9 +280,20 @@ def handle_message(phone, text):
         if text == "0":
             sess["state"] = "categories"
             send_msg(phone, categories_msg())
+        elif text == "3":
+            if not sess["cart"]:
+                send_msg(phone, "🛒 Cart is empty! Add items first.")
+            else:
+                sess["state"] = "order_type"
+                send_msg(phone,
+                    "📦 *How would you like your order?*\n\n"
+                    "1️⃣  Dine-in\n"
+                    "2️⃣  Takeaway\n"
+                    "3️⃣  Delivery\n\n"
+                    "_Reply with a number_"
+                )
         elif text in MENU[cat_key]["items"]:
             item_name, item_price = MENU[cat_key]["items"][text]
-            # check if already in cart
             for c in sess["cart"]:
                 if c["name"] == item_name:
                     c["qty"] += 1
@@ -275,20 +308,7 @@ def handle_message(phone, text):
                 "0️⃣  Back to categories\n"
                 "Reply *3* to place order"
             )
-            # check if user replies 3 from item screen
             sess["state"] = f"items_{cat_key}"
-        elif text == "3":
-            if not sess["cart"]:
-                send_msg(phone, "🛒 Cart is empty! Add items first.")
-            else:
-                sess["state"] = "order_type"
-                send_msg(phone,
-                    "📦 *How would you like your order?*\n\n"
-                    "1️⃣  Dine-in\n"
-                    "2️⃣  Takeaway\n"
-                    "3️⃣  Delivery\n\n"
-                    "_Reply with a number_"
-                )
         else:
             send_msg(phone, items_msg(cat_key))
         return
@@ -331,32 +351,28 @@ def handle_message(phone, text):
             order_type = sess.get("order_type", "Dine-in")
             if order_type == "Delivery":
                 order_type += f" — {sess.get('address', '')}"
-            summary = order_summary(sess["name"], sess["cart"], order_type)
-            # Send to both restaurant numbers
+            summary = order_summary(sess["cart"], order_type, phone)
             for num in RESTAURANT_NUMBERS:
                 send_msg(num, summary)
-            # Confirm to customer
             total = sum(i["price"] * i["qty"] for i in sess["cart"])
             send_msg(phone,
                 f"🎉 *Order Confirmed!*\n\n"
-                f"Thank you *{sess['name']}*!\n"
                 f"💰 Total: Rs. {total}\n"
                 f"⏱️ Estimated time: 20-30 mins\n\n"
-                f"We'll contact you shortly on this number.\n\n"
-                f"📞 Questions? Call 0321-0111994\n\n"
+                f"We'll contact you shortly! 📲\n\n"
                 f"Thank you for choosing *Dawn & Dusk!* 🌅"
             )
             clear_session(phone)
         elif text.upper() == "NO":
             sess["state"] = "main_menu"
-            send_msg(phone, "Order cancelled.\n\n" + main_menu_msg(sess["name"]))
+            send_msg(phone, "Order cancelled.\n\n" + main_menu_msg())
         else:
             send_msg(phone, "Please reply *YES* to confirm or *NO* to cancel.")
         return
 
     # ── Fallback ─────────────────────────────
     clear_session(phone)
-    send_msg(phone, welcome_msg())
+    send_msg(phone, home_msg())
 
 # ══════════════════════════════════════════════
 #  FLASK ROUTES
@@ -392,5 +408,5 @@ def home():
     return "Dawn & Dusk WhatsApp Bot is running! 🌅", 200
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
+    port = int(os.environ.get("PORT", 8080))
     app.run(host="0.0.0.0", port=port, debug=False)
