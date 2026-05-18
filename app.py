@@ -322,10 +322,15 @@ def handle_message(phone, text):
                 sess["state"] = "delivery_address"
                 send_msg(phone, "📍 Please share your *delivery address*:")
             else:
+                note = (
+                    "\n\n💳 *Payment Info:*\n"
+                    "Advance payment required for Takeaway & Delivery orders.\n"
+                    "JazzCash / EasyPaisa: *0300-6637232*"
+                )
                 sess["state"] = "confirm_order"
                 send_msg(phone,
-                    cart_msg(sess["cart"]) + f"\n\n📦 Type: *{types[text]}*\n\n"
-                    "Reply *YES* to confirm order\nReply *NO* to cancel"
+                    cart_msg(sess["cart"]) + f"\n\n📦 Type: *{types[text]}*" +
+                    note + "\n\nReply *YES* to confirm order\nReply *NO* to cancel"
                 )
         else:
             send_msg(phone,
@@ -341,6 +346,10 @@ def handle_message(phone, text):
         send_msg(phone,
             cart_msg(sess["cart"]) +
             f"\n\n📦 Type: *Delivery*\n📍 Address: {text}\n\n"
+            "📝 *Please Note:*\n"
+            "• Delivery charges may apply as per your location.\n"
+            "• Advance payment required for delivery orders.\n"
+            "• JazzCash / EasyPaisa: *0300-6637232*\n\n"
             "Reply *YES* to confirm order\nReply *NO* to cancel"
         )
         return
@@ -359,6 +368,8 @@ def handle_message(phone, text):
                 f"🎉 *Order Confirmed!*\n\n"
                 f"💰 Total: Rs. {total}\n"
                 f"⏱️ Estimated time: 20-30 mins\n\n"
+                f"💳 *Payment:*\n"
+                f"JazzCash / EasyPaisa: *0300-6637232*\n\n"
                 f"We'll contact you shortly! 📲\n\n"
                 f"Thank you for choosing *Dawn & Dusk!* 🌅"
             )
