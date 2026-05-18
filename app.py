@@ -367,7 +367,7 @@ def handle_message(phone, text):
             send_msg(phone,
                 f"🎉 *Order Confirmed!*\n\n"
                 f"💰 Total: Rs. {total}\n"
-                f"⏱️ Estimated time: 20-30 mins\n\n"
+                f"⏱️ Estimated time: 30-45 mins\n\n"
                 f"💳 *Payment:*\n"
                 f"JazzCash / EasyPaisa: *0300-6637232*\n\n"
                 f"We'll contact you shortly! 📲\n\n"
