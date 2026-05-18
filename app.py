@@ -8,7 +8,7 @@ app = Flask(__name__)
 #  CONFIGURATION  ← paste your values here
 # ─────────────────────────────────────────────
 VERIFY_TOKEN        = "dawndusk2024"
-ACCESS_TOKEN        = os.environ.get("ACCESS_TOKEN", "")
+ACCESS_TOKEN        = "EAAVxqP9INMUBRXvIrBpHCOMPyfBgycOWq7PKQ2LlXdNGhdwhVHSzxtmW7shd2FLUlKpx6eZCmPhh3cBVqQqB71TRwC5zyAlsWVpwZARm2djwkrf6L2oZAQuoqkZAKXBYd5eXGFT9gMVTHUp3oCpDJ8J5HmRA9yQuZBZAQrGeLRlgTPvreIuzno2tPCUEBDWv0YtVXyFDVp2einV0WaE9zdrOn70ZCxZBstEalazfj9ZBEnikn8U3x7prpbpFSVDKr1c7e0xtKAXcrl7sEuiWzkwz0FLhEvTk4K6b3nAFZBwgZDZD"
 PHONE_NUMBER_ID     = "1067385306468675"
 RESTAURANT_NUMBERS  = ["923210111994", "923006637232"]
 BUSINESS_WA_LINK    = "https://wa.me/923210111994"
