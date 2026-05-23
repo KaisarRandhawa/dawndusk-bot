@@ -1,8 +1,12 @@
 import os
+import time
 import requests
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
+
+# Session timeout in seconds (1 hour = 3600)
+SESSION_TIMEOUT = 3600
 
 # ─────────────────────────────────────────────
 #  CONFIGURATION  ← paste your values here
@@ -107,12 +111,19 @@ MENU = {
 sessions = {}
 
 def get_session(phone):
+    now = time.time()
     if phone not in sessions:
-        sessions[phone] = {"state": "home", "cart": []}
+        sessions[phone] = {"state": "home", "cart": [], "last_active": now}
+    else:
+        last_active = sessions[phone].get("last_active", now)
+        if now - last_active > SESSION_TIMEOUT:
+            sessions[phone] = {"state": "home", "cart": [], "last_active": now}
+        else:
+            sessions[phone]["last_active"] = now
     return sessions[phone]
 
 def clear_session(phone):
-    sessions[phone] = {"state": "home", "cart": []}
+    sessions[phone] = {"state": "home", "cart": [], "last_active": time.time()}
 
 # ══════════════════════════════════════════════
 #  SEND MESSAGE
@@ -367,7 +378,7 @@ def handle_message(phone, text):
             send_msg(phone,
                 f"🎉 *Order Confirmed!*\n\n"
                 f"💰 Total: Rs. {total}\n"
-                f"⏱️ Estimated time: 30-45 mins\n\n"
+                f"⏱️ Estimated time: 20-30 mins\n\n"
                 f"💳 *Payment:*\n"
                 f"JazzCash / EasyPaisa: *0300-6637232*\n\n"
                 f"We'll contact you shortly! 📲\n\n"
